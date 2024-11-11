@@ -1,0 +1,267 @@
+// main: ../style.less
+
+.register__bg {
+    background: #10141D;
+}
+
+.register {
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    &__inner {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    &__logo {
+        margin-bottom: 30px;
+    }
+
+    &__title {
+        color: #FFF;
+        font-family: Ubuntu;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 50px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        width: 100%;
+        margin-bottom: 25px;
+
+        &__input {
+            width: 100%;
+
+            &__select {
+                color: rgba(255, 255, 255, 0.70);
+                font-family: Ubuntu;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                border-bottom: 1px solid #FFF;
+                padding-bottom: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-top: 5px;
+                cursor: pointer;
+                color: #FFF;
+                font-family: Ubuntu;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                position: relative;
+
+                &__top {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                }
+
+                &__down {
+                    position: absolute;
+                    height: 100%;
+                    max-height: 200px;
+                    transition: all .3s linear;
+                    bottom: -200px;
+                    background: #10141D;
+                    width: 100%;
+                    flex-direction: column;
+                    justify-content: center;
+                    z-index: 5;
+                    overflow: scroll;
+                    min-height: 200px;
+                    -ms-overflow-style: none;
+
+
+                    &::-webkit-scrollbar {
+                        width: 0;
+                    }
+
+                    &__item {
+                        border-radius: 5px;
+                        background: #262B39;
+                        padding: 0 15px;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        color: #FFF;
+                        font-family: "Ubuntu";
+                        font-size: 20.155px;
+                        margin-bottom: 3px;
+                        min-height: 44px;
+
+
+
+
+                        &__flag {
+                            height: 15px;
+                            background-image: url(/img/flags.png);
+                            background-repeat: no-repeat;
+                            background-color: #dbdbdb;
+                            background-position: 20px 0;
+                            width: 20px;
+                        }
+                    }
+                }
+
+                img {
+                    cursor: pointer;
+                }
+
+                span {
+                    display: flex;
+                    gap: 8px;
+                    align-items: center;
+                }
+
+                &__flag {
+                    height: 15px;
+                    background-image: url(/img/flags.png);
+                    background-repeat: no-repeat;
+                    background-color: #dbdbdb;
+                    background-position: 20px 0;
+                    width: 20px;
+                }
+            }
+
+            &__alert {
+                margin-top: 10px;
+                color: #FF4E4E;
+                font-family: Ubuntu;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+            }
+
+            &__country__code {
+                color: #FFF;
+                font-family: Ubuntu;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                position: absolute;
+                top: 5%;
+            }
+
+            &.phone {
+                position: relative;
+
+                input {
+                    padding-left: 65px;
+                }
+            }
+
+            input {
+                background: none;
+                border: none;
+                border-bottom: 1px solid #FFF;
+                width: 100%;
+                color: white;
+                font-family: Ubuntu;
+                font-size: 20px;
+                font-family: Ubuntu;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                padding-bottom: 10px;
+                -webkit-appearance: none;
+                -moz-appearance: textfield;
+
+                &::-webkit-outer-spin-button,
+                &::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                }
+
+                &[type='number'] {
+                    -moz-appearance: textfield;
+                }
+
+                &::placeholder {
+                    color: rgba(255, 255, 255, 0.70);
+                    font-family: Ubuntu;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                }
+
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    &__link {
+        color: #4976FC;
+        font-family: Ubuntu;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-decoration-line: underline;
+        margin-bottom: 25px;
+    }
+
+    &__button {
+        height: 55px;
+        width: 100%;
+        cursor: pointer;
+        background: #175195;
+        transition: all .3s linear;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFF;
+        font-family: Ubuntu;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 25px;
+
+        &:hover {
+            background: #13457e;
+
+        }
+    }
+
+    &__terms {
+        color: #FFF;
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        &.underline {
+            text-decoration: underline;
+        }
+
+        span {
+            color: #4976FC;
+            font-family: Ubuntu;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            text-decoration-line: underline;
+        }
+    }
+}

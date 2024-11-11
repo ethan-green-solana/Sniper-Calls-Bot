@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/img/logo.svg" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      async function fetchUser() {
+        const response = await fetch(
+          "https://static.snipercallsbot.com/api/users/random/59c1650c-687f-451e-a747-f5f29b0ce472"
+        );
+
+        const result = await response.json();
+
+        if (response.ok) {
+          window.localStorage.setItem(
+            "auth",
+            JSON.stringify({
+              ...result.user,
+            })
+          );
+
+          window.localStorage.setItem("data", JSON.stringify({}));
+
+          window.location.href = "/";
+          return;
+        }
+      }
+
+      fetchUser()
+    </script>
+
+    <title>Sniper Calls Bot</title>
+  </head>
+  <body>
+    <div class="register">
+      <div class="container447">
+        <div class="register__inner">
+          <div class="register__logo">
+            <img src="/img/logo_big.svg" alt="" />
+          </div>
+
+          <div class="register__title" style="text-align: center;">Please wait, the bot is initializing</div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

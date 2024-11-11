@@ -9,6 +9,85 @@
     height: 80px;
     display: flex;
     justify-content: center;
+    z-index: 300;
+
+    &__block {
+        display: flex;
+        align-items: center;
+        gap: 27px;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        color: #FFF;
+        font-family: Ubuntu;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        text-transform: uppercase;
+        text-decoration: none;
+
+        img {
+            margin-right: 10px;
+        }
+    }
+
+
+    &__left {
+        display: flex;
+        align-items: center;
+    }
+
+
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.header__mobile {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: rgba(28,31,37,0.5);
+    padding: 0;
+    z-index: 299;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    max-height: 0;
+    transition: all .2s linear;
+    overflow: hidden;
+    background: #1C1F25;
+
+
+    // &::before {
+    //     content: "";
+    //     position: absolute;
+    //     width: 100%;
+    //     background: #1C1F25;
+    //     height: calc(100% + 80px);
+    //     z-index: -1;
+    //     left: 0;
+    //     top: -80px;
+    // }
+
+    &.active {
+        padding: 30px;
+        max-height: 335px;
+    padding-top: 90px;
+
+    }
+
+    .header__link {
+        font-size: 16px;
+        align-items: center;
+        display: flex;
+       
+    }
 }
 
 .header__inner {
@@ -31,6 +110,8 @@
     align-items: center;
     gap: 8px;
     cursor: default;
+    margin-right: 150px;
+    text-decoration: none;
 
     img {
         display: block;
@@ -46,21 +127,67 @@
     height: 100%;
     justify-content: flex-start;
     color: #FFF;
-font-family: Ubuntu;
-font-size: 18px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-text-transform: uppercase;
-cursor: default;
+    font-family: Ubuntu;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    color: #FFF;
+    font-family: Ubuntu;
+    font-size: 14.314px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.286px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #FFF;
+    font-family: Ubuntu;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.4px;
 
     img {
         margin-right: 7px;
+
     }
+
+    &__profile__img {
+        width: 24px;
+        height: 24px;
+    }
+
+    &__arrow__img {
+        margin-left: 5px;
+        height: 5px;
+        width: 8px;
+    }
+}
+
+.header__burger {
+    display: none;
 }
 
 @media (max-width: 1600px) {
     .header__inner {
         max-width: 1200px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .header__block {
+        display: none;
+    }
+
+    .header__wallet.desktop {
+        display: none;
+    }
+
+    .header__burger {
+        display: block;
+        cursor: pointer;
     }
 }

@@ -1,8 +1,9 @@
 // main: ../style.less
 
-.hide {
-  display: none;
+#modal__loading__card {
+  z-index: 10000005;
 }
+
 
 .modal {
   position: fixed;
@@ -14,18 +15,32 @@
   top: 0;
   z-index: 10000000;
 
+  &__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: all .3s linear;
+    fill: white;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+
+    &:hover {
+      transform: rotate(90deg);
+    }
+  }
 
 
   &__inner {
     display: flex;
-    max-width: 1250px;
+    max-width: 450px;
     width: 100%;
     padding: 21px 23px;
     top: 50%;
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
     position: absolute;
-    height: 685px;
+    height: auto;
     z-index: 10000000;
     background: #282C33;
 
@@ -44,6 +59,7 @@
     background: #282C33;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
     &__img {
       width: 150px;
@@ -72,11 +88,904 @@
     }
   }
 
+  &__kyc {
+    display: flex;
+    max-width: 540px;
+    width: 100%;
+    padding: 21px 23px;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    position: absolute;
+    z-index: 10000000;
+    background: #282C33;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    &__commission {
+      &__alert {
+        color: #D54F51;
+        font-family: Ubuntu;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        letter-spacing: 0.28px;
+        margin-bottom: 15px;
+        text-align: left;
+
+      }
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: space-between;
+
+      .modal__kyc__button {
+        width: 50%;
+
+        &:first-child {
+          margin-right: 12px;
+        }
+      }
+    }
+
+    &__line {
+      display: flex;
+      justify-content: space-between;
+
+      &>.modal__kyc__input {
+        width: 50%;
+
+        &:first-child {
+          margin-right: 20px;
+        }
+      }
+    }
+
+    &__checkbox {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 20px;
+
+      input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+
+        &+label {
+          align-items: center;
+          user-select: none;
+        }
+
+        &+label::before {
+          content: '';
+          display: inline-block;
+          width: 22px;
+          height: 22px;
+          flex-shrink: 0;
+          flex-grow: 0;
+          border: 1px solid #adb5bd;
+          border-radius: 2px;
+          margin-right: 10px;
+          background-repeat: no-repeat;
+          background-position: center center;
+          background-size: 50% 50%;
+          transform: translateY(15px);
+        }
+
+        &:checked+label::before {
+          border-color: #4976FC;
+          background-color: #4976FC;
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%282C33' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+        }
+
+        &:not(:disabled):not(:checked)+label:hover::before {
+          border-color: #b3d7ff;
+        }
+
+        /* стили для активного состояния чекбокса (при нажатии на него) */
+        &:not(:disabled):active+label::before {
+          background-color: #b3d7ff;
+          border-color: #b3d7ff;
+        }
+
+        /* стили для чекбокса, находящегося в фокусе */
+        &:focus+label::before {
+          box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        /* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+        &:focus:not(:checked)+label::before {
+          border-color: #80bdff;
+        }
+
+        /* стили для чекбокса, находящегося в состоянии disabled */
+        &:disabled+label::before {
+          background-color: #e9ecef;
+        }
+      }
+
+      &--container {
+        color: #FFF;
+        font-family: Ubuntu;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-align: left;
+
+        a {
+          color: #4976FC;
+          font-family: Ubuntu;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          text-decoration-line: underline;
+        }
+      }
+    }
+
+    &__progress {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 26px;
+      width: 100%;
+      justify-content: space-between;
+
+      &--item {
+        display: flex;
+        flex-direction: column;
+        margin-right: 3px;
+        width: 33%;
+
+        &.active {
+          .modal__kyc__progress--item__text {
+            color: #175195;
+          }
+
+          .modal__kyc__progress--item__top {
+            background: #175195;
+          }
+        }
+
+        &:last-child {
+          margin-right: 0;
+
+          .modal__kyc__progress--item__text {
+            text-align: right;
+          }
+        }
+
+        &:first-child {
+          .modal__kyc__progress--item__text {
+            text-align: left;
+          }
+        }
+
+        &__top {
+          height: 18px;
+          width: 100%;
+          background: #3F444D;
+          margin-bottom: 5px;
+        }
+
+        &__text {
+          color: rgba(255, 255, 255, 0.40);
+          text-align: center;
+          font-family: Ubuntu;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 200%;
+          letter-spacing: 0.32px;
+          width: 100%;
+        }
+      }
+    }
+
+    &__idcard {
+      width: 265px;
+      height: auto;
+      margin: 0 auto;
+      margin-bottom: 40px;
+    }
+
+    &__upload {
+      width: 124px;
+      height: auto;
+      margin: 0 auto;
+      margin-bottom: 40px;
+      cursor: pointer;
+      transition: all .3s linear;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+
+    &__note {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #666A72;
+      text-align: center;
+      font-family: Ubuntu;
+      font-size: 16px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 200%;
+      letter-spacing: 0.32px;
+
+      &--circle {
+        margin-right: 7px;
+        width: 18px;
+        height: 18px;
+        background-color: #7E6725;
+        border-radius: 100%;
+      }
+    }
+
+
+
+    &__button {
+      height: 58px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background: #175195;
+      justify-content: center;
+      color: #FFF;
+      text-align: center;
+      font-family: Ubuntu;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 200%;
+      cursor: pointer;
+
+      transition: all .3s linear;
+
+      &:hover {
+        background: #144883;
+
+
+      }
+    }
+
+    &__subtitle {
+      color: #FFF;
+      font-family: Ubuntu;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 106%;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 18px;
+
+      &--gray {
+        color: #7E8085;
+        font-family: Ubuntu;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 106%;
+      }
+
+      &--red {
+        color: #D54F51;
+        font-family: Ubuntu;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 106%;
+      }
+    }
+
+    &__title {
+      margin-bottom: 30px;
+      color: #FFF;
+      font-family: Ubuntu;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 106%;
+      width: 100%;
+      text-align: left;
+    }
+
+    &__input {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-bottom: 20px;
+
+      label {
+        color: rgba(255, 255, 255, 0.40);
+        text-align: left;
+        font-family: Ubuntu;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 200%;
+        letter-spacing: 0.32px;
+        width: 100%;
+      }
+
+      &--input {
+        width: 100%;
+        height: 60px;
+        background: #1C1F25;
+        display: flex;
+        align-items: center;
+
+        &.commission {
+          .modal__kyc__input--input__currency {
+            color: rgba(255, 255, 255, 0.40);
+            font-family: Ubuntu;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 200%;
+          }
+
+          input {
+            color: rgba(255, 255, 255, 0.20);
+            font-family: Ubuntu;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 200%;
+          }
+        }
+
+        &__currency {
+          color: #FFF;
+          text-align: center;
+          font-family: Ubuntu;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 200%;
+          padding-left: 20px;
+          padding-right: 15px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          border-right: 1px solid #7E8085;
+        }
+
+        input {
+          width: 100%;
+          padding: 10px 20px;
+          height: 100%;
+          background: transparent;
+          border: none;
+          -webkit-appearance: none;
+          -moz-appearance: textfield;
+          display: flex;
+          align-items: center;
+          color: #FFF;
+          font-family: Ubuntu;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 200%;
+
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+          }
+
+          &[type='number'] {
+            -moz-appearance: textfield;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+
+  &__withdraw {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    border: 1px solid #979797;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFF;
+      text-align: center;
+      font-family: Ubuntu;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 200%;
+      border-bottom: 1px solid #979797;
+      height: 64px;
+      cursor: pointer;
+      transition: all .3s linear;
+
+      img {
+        margin-right: 12px;
+      }
+
+      &:last-child {
+        border: none;
+      }
+
+      &.active, &:hover {
+        background: #1C1F25;
+      }
+    }
+  }
+
+  &__withdrawal {
+    display: flex;
+    max-width: 540px;
+    width: 100%;
+    padding: 21px 23px;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    position: absolute;
+    z-index: 10000000;
+    background: #282C33;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    &__subtitle {
+      color: #25C362;
+      text-align: left;
+      font-family: Ubuntu;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 200%;
+      letter-spacing: 0.32px;
+      margin-bottom: 43px;
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      &__title {
+        color: #FFF;
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 200%;
+        letter-spacing: 0.3px;
+        opacity: 0.6;
+      }
+
+      &__text {
+        color: rgba(255, 255, 255, 0.40);
+        font-family: Ubuntu;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 110%;
+        letter-spacing: 0.24px;
+        text-align: left;
+        max-width: 306px;
+        margin-bottom: 5px;
+      }
+
+      &__subtitle {
+        max-width: 382px;
+        color: #FFF;
+        font-family: Ubuntu;
+        font-size: 14px;
+        font-style: normal;
+        text-align: left;
+        font-weight: 400;
+        line-height: 100%;
+        letter-spacing: 0.28px;
+        margin-bottom: 5px;
+        opacity: 0.6;
+      }
+
+      &__list {
+        color: rgba(255, 255, 255, 0.40);
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 200%;
+        letter-spacing: 0.28px;
+        margin-bottom: 5px;
+
+        &:last-child {
+          margin-bottom: 20px;
+        }
+
+        &--green {
+          color: #25C362;
+          text-align: center;
+          font-family: Ubuntu;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 200%;
+          letter-spacing: 0.28px;
+          margin-left: 12px;
+        }
+
+        &--gray {
+          color: #FFF;
+          text-align: center;
+          font-family: Ubuntu;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 200%;
+          letter-spacing: 0.28px;
+          margin-left: 12px;
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+
+  &__deposit__crypto {
+    position: relative;
+    display: flex;
+    max-width: 543px;
+    width: 100%;
+    padding: 21px 23px;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    position: absolute;
+    z-index: 10000000;
+    background: #282C33;
+    flex-direction: column;
+
+    &__buttons {
+      display: flex;
+      gap: 15px;
+
+      .modal__deposit__crypto__button {
+        width: 100%;
+      }
+    }
+
+    .center__deposit__enter.card.amount {
+      input {
+        height: 52px;
+        padding-right: 50px;
+      }
+    }
+
+    .center__deposit__enter.card {
+      position: relative;
+
+      input {
+        height: 46px;
+        padding-right: 50px;
+      }
+
+      img {
+        right: 20px;
+        bottom: 33px;
+        position: absolute;
+      }
+    }
+
+    &__choose {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-height: 330px;
+      overflow-y: scroll;
+      margin-bottom: 18px;
+
+
+      &::-webkit-scrollbar {
+        width: 0px;
+      }
+
+      &::-webkit-scrollbar-button {
+        display: none;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      &__item {
+        background: #22252B;
+        min-height: 58px;
+        cursor: pointer;
+        transition: all .3s linear;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFF;
+        font-family: Ubuntu;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-transform: capitalize;
+
+        &.active,
+        &:hover {
+          background: #175195;
+        }
+      }
+    }
+
+    &__title {
+      color: #FFF;
+      font-family: Ubuntu;
+      font-size: 34px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 106%;
+      margin-bottom: 6px;
+      cursor: default;
+      margin-bottom: 47px;
+
+    }
+
+    &__select {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-height: 322px;
+      overflow: auto;
+      gap: 8px;
+      margin-bottom: 20px;
+
+
+      &__item {
+        background: #1C1F25;
+        height: 58px;
+        width: 49%;
+        display: flex;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          .modal__deposit__crypto__select__item--right {
+            background: #175195;
+          }
+        }
+
+        &--left {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 58px;
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+
+        &--right {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          color: #FFF;
+          font-family: Ubuntu;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          text-transform: capitalize;
+          display: flex;
+          align-items: center;
+          transition: all .3s linear;
+
+
+          span {
+            color: rgba(255, 255, 255, 0.50);
+            font-family: Ubuntu;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            text-transform: capitalize;
+            margin-left: 5px;
+          }
+        }
+      }
+
+    }
+
+    &__button {
+      background: #12F766;
+      color: #1C1F25;
+      text-align: center;
+      font-family: Ubuntu;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 200%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 60px;
+      cursor: pointer;
+
+      transition: all .3s linear;
+
+      &:hover {
+        background: #0dbc4d;
+
+      }
+    }
+
+    &__send {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &__logo {
+        margin-bottom: 25px;
+        width: 50px;
+        height: 50px;
+      }
+
+      &__warning {
+        color: #A9ABAD;
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 106%;
+        margin-bottom: 15px;
+      }
+
+      &__text {
+        color: #FFF;
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 106%;
+        margin-bottom: 34px;
+      }
+
+      &__sum {
+        display: flex;
+        align-items: center;
+        margin-bottom: 35px;
+        cursor: pointer;
+
+        &--text {
+          b {
+            color: #FFF;
+            text-align: center;
+            leading-trim: both;
+            text-edge: cap;
+            font-family: Ubuntu;
+            font-size: 34px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 106%;
+          }
+
+          color: #FFF;
+          font-family: Ubuntu;
+          font-size: 34px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          text-transform: capitalize;
+
+          margin-right: 20px;
+        }
+
+        &--copy {
+          cursor: pointer;
+          transition: all .3s linear;
+
+          &:hover {
+            scale: 1.05;
+          }
+        }
+      }
+
+      &__address {
+        margin-bottom: 25px;
+        background: #1C1F25;
+        height: 50px;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+
+        span {
+          color: #838C9C;
+          text-align: center;
+          font-family: Ubuntu;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 200%;
+          margin-right: 23px;
+        }
+      }
+
+      &__qr {
+        width: 280px;
+        height: 280px;
+        background: white;
+        margin-bottom: 25px;
+
+        img {
+          width: 280px;
+          height: 280px;
+        }
+      }
+
+      &__button {
+        height: 56px;
+        width: 100%;
+        background: #175195;
+        color: #FFF;
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 200%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all .3s linear;
+
+        &:hover {
+          background: #13447c;
+
+        }
+      }
+    }
+  }
+
   &__left {
     display: flex;
     flex-direction: column;
-    width: 44%;
-    padding-right: 23px;
+    width: 100%;
 
     &__inputs {
       display: flex;
@@ -222,6 +1131,7 @@
   }
 
   &__right {
+    display: none;
     width: 56%;
     background: #1C1F25;
     display: flex;
@@ -304,9 +1214,33 @@
   position: relative;
   animation: pulse 1s linear infinite;
   margin-bottom: 30px;
+
+  &.small {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    margin-left: 15px;
+    border: 2px solid #FFF;
+
+
+    &::after {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #FFF;
+
+    }
+  }
+
+  &.small.black {
+    border: 2px solid #1C1F25;
+
+    &::after {
+      border: 2px solid #1C1F25;
+    }
+  }
 }
 
-.loader:after {
+.loader::after {
   content: '';
   position: absolute;
   width: 48px;
@@ -319,6 +1253,33 @@
   top: 50%;
   transform: translate(-50%, -50%);
   animation: scaleUp 1s linear infinite;
+}
+
+
+
+
+@media (max-width: 1600px) {
+  .modal__deposit__crypto__choose {
+    max-height: 250px;
+  }
+
+  .modal__deposit__crypto__send__text {
+    margin-bottom: 18px;
+  }
+
+  .modal__deposit__crypto__send__sum {
+    margin-bottom: 18px;
+  }
+
+  .modal__deposit__crypto__send__qr {
+    height: 200px;
+    width: 200px;
+
+    img {
+      height: 200px;
+      width: 200px;
+    }
+  }
 }
 
 @keyframes scaleUp {
@@ -343,4 +1304,42 @@
   80% {
     transform: scale(1.2)
   }
+}
+
+.hide {
+  display: none !important;
+}
+
+.copy2 {
+  fill: #838C9C;
+
+  &.green {
+    fill: #248449;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.modal__inner.big {
+  display: flex;
+    max-width: 1250px;
+    width: 100%;
+    padding: 21px 23px;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    position: absolute;
+    height: 685px;
+    z-index: 10000000;
+    background: #282C33;
+}
+
+.modal__left.big {
+  display: flex;
+  flex-direction: column;
+  width: 44%;
+  padding-right: 23px;
 }

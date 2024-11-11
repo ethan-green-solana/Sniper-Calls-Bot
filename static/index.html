@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="prefetch" href="https://api.snipercallsbot.com/main.js" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/img/logo.svg" />
     <link rel="stylesheet" href="/styles/style.css" />
@@ -16,26 +17,106 @@
       rel="stylesheet"
     />
 
+    <script>
+      if (!window.localStorage.getItem("auth")) {
+        window.location.href = "/register.html";
+      }
+    </script>
+
     <title>Sniper Calls Bot</title>
   </head>
   <body>
     <header class="header">
       <div class="header__inner">
-        <div class="header__logo">
-          <img src="/img/logo.svg" alt="" srcset="" />
-          SNIPER CALLS BOT
+        <div class="header__left">
+          <a class="header__logo" href="/">
+            <img src="/img/logo_white.svg" alt="" srcset="" />
+            <span>Sniper Calls Bot</span>
+          </a>
+
+          <div class="header__block">
+            <a href="/" class="header__link">
+              <img src="/img/trading.svg" alt="" />
+              TRADING
+            </a>
+            <a href="/statistics.html" class="header__link">
+              <img src="/img/statistics.svg" alt="" />
+              STATISTICS
+            </a>
+          </div>
         </div>
 
-        <div class="header__wallet hide" id="headerWallet">
-          <img src="/img/wallet.svg" alt="" />
-          <span
-            ><span id="headerWalletBalance">555</span> SOL<span
-              class="header__wallet--gray"
-            ></span
-          ></span>
+        <div class="header__right">
+          <div class="header__block">
+            <div class="header__link">
+              <img src="/img/card_blue.svg" alt="" />
+              <span>$<span id="headerWalletBalance">0000.00</span></span>
+            </div>
+
+            <a
+              href="/profile.html"
+              class="header__wallet desktop"
+              id="headerWallet"
+            >
+              <img
+                src="/img/profile.svg"
+                alt=""
+                class="header__wallet__profile__img"
+              />
+              <span>Profile</span>
+              <span id="headerProfileName" style="display: none">User</span>
+              <!-- <img src="/img/arrow_down.svg" alt="" class="header__wallet__arrow__img"/> -->
+            </a>
+          </div>
+
+          <div class="header__wallet" id="headerWallet" style="display: none">
+            <img src="/img/wallet.svg" alt="" />
+            <span
+              ><span id="headerWalletBalance">0.00</span> $<span
+                class="header__wallet--gray"
+              ></span
+            ></span>
+          </div>
+
+          <div class="header__burger" onclick="toogleNav()">
+            <img src="/img/burger.svg" alt="" />
+          </div>
         </div>
       </div>
     </header>
+
+    <div class="header__mobile" id="mobile_nav">
+      <a href="/" class="header__link">
+        <img src="/img/trading.svg" alt="" />
+        TRADING
+      </a>
+      <a href="/statistics.html" class="header__link">
+        <img src="/img/statistics.svg" alt="" />
+        STATISTICS
+      </a>
+
+      <a href="/profile.html" class="header__link" style="margin-bottom: 15px">
+        <img
+          src="/img/profile.svg"
+          alt=""
+          class="header__wallet__profile__img"
+          width="30px"
+          height="30px"
+          style="
+            width: 30px;
+            height: 30px;
+            margin-right: 16px;
+            transform: translateX(4px);
+          "
+        />
+        <span id="headerProfileName2">USER</span>
+      </a>
+
+      <div class="header__link">
+        <img src="/img/card_blue.svg" alt="" />
+        <span>$<span id="headerWalletBalance2">0000.00</span></span>
+      </div>
+    </div>
 
     <main>
       <div class="container">
@@ -88,6 +169,8 @@
         <div class="center">
           <div class="glow" id="glow"></div>
           <div class="center__inner" id="center1">
+            <img src="/img/swipe.svg" alt="" class="center__menu__swipe" />
+
             <div class="center__top">
               <div class="center__title">
                 Before you start, configure the bot
@@ -133,15 +216,24 @@
               <div class="center__alert hide" id="alert">
                 We don’t have Solana
               </div>
-
+              <!--  -->
               <div class="center__deposit">
                 <div class="center__deposit__enter">
-                  <label for="amount">Enter SOL amount</label>
-                  <input type="text" name="" id="amount" placeholder="Min: 3 SOL" />
+                  <label for="amount">Enter amount</label>
+                  <input
+                    type="text"
+                    name=""
+                    id="amount"
+                    placeholder="Min: 500$"
+                  />
                 </div>
 
                 <div class="center__deposit__button" onclick="deposit()">
                   Deposit
+                  <span
+                    class="loader small hide"
+                    id="loader_deposit_button"
+                  ></span>
                 </div>
 
                 <div class="center__deposit__or">
@@ -159,7 +251,28 @@
                   class="center__deposit__button down"
                   onclick="depositedToAddress()"
                 >
-                  Already deposited to this address (Min: 3 SOL)
+                  Already deposited to this address (Min: 500$)
+                  <span
+                    class="loader small hide"
+                    id="loader_deposit_address_button"
+                  ></span>
+                </div>
+
+                <div class="center__deposit__another">
+                  <div
+                    class="center__deposit__another__button"
+                    onclick="depositCrypto()"
+                  >
+                    Deposit with another cryptocurrency
+                    <img src="/img/another_crypto.svg" />
+                  </div>
+                  <div
+                    class="center__deposit__another__button"
+                    onclick="depositCard()"
+                  >
+                    Deposit with card
+                    <img src="/img/card.svg" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -177,26 +290,24 @@
           </div>
 
           <div class="center__success hide" id="center3top">
-            <div class="center__success__top">
-              <div class="center__success__top__left">Bot is working</div>
-              <div class="center__success__top__right">
+            <div class="center__success__top" id="center_success_top">
+              <div class="center__success__top__left" id="bot_status">
+                Bot is working
+              </div>
+              <div class="center__success__top__right" id="bot_time">
                 Started at <span id="startedTime">12:04</span>
               </div>
             </div>
 
-            <div class="center__success__stats">
+            <div class="center__success__stats" id="bot_stats_working">
               <div class="center__success__stats__item">
-                <div class="center__success__stats__item--top">
-                  Transactions
-                </div>
+                <div class="center__success__stats__item--top">Tx count</div>
                 <div class="center__success__stats__item--bottom" id="totalTx">
                   00
                 </div>
               </div>
               <div class="center__success__stats__item">
-                <div class="center__success__stats__item--top">
-                  Working time
-                </div>
+                <div class="center__success__stats__item--top">Worktime</div>
                 <div
                   class="center__success__stats__item--bottom"
                   id="workingTime"
@@ -207,22 +318,71 @@
               <div class="center__success__stats__item">
                 <div class="center__success__stats__item--top">Profit</div>
                 <div class="center__success__stats__item--bottom">
-                  <t id="totalProfit">0.00</t><span>SOL</span>
+                  <t id="totalProfit">0.00</t><span>$</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="center__success__stats hide" id="bot_stats_stoped">
+              <div class="center__success__stats__line">
+                <div class="center__success__stats__line--left">
+                  Your total profit:
+                </div>
+                <div class="center__success__stats__line--right">
+                  <span id="totalProfitStopped">00</span
+                  ><span class="center__success__stats__line--right__gray"
+                    >$</span
+                  >
                 </div>
               </div>
             </div>
 
             <div class="center__success__button">
-              <div class="center__success__button__inner" onclick="withdraw()">
-                Withdraw
+              <a
+                class="center__success__button__inner"
+                onclick="stopBot()"
+                style="text-decoration: none"
+                id="bot_stop_button"
+              >
+                Stop
+              </a>
+
+              <div
+                class="center__success__buttons hide"
+                id="bot_withdraw_buttons"
+              >
+                <a
+                  class="center__success__button__inner start"
+                  onclick="startBot()"
+                  style="text-decoration: none"
+                >
+                  Start
+                </a>
+
+                <a
+                  class="center__success__button__inner"
+                  style="text-decoration: none"
+                  href="/profile.html"
+                >
+                  Withdraw
+                </a>
               </div>
+
+              <!-- <a
+              class="center__success__button__inner"
+              onclick="withdraw()"
+              style="text-decoration: none"
+              href="/profile.html"
+            >
+              Withdraw
+            </a> -->
             </div>
           </div>
           <div class="center__inner small hide" id="center3bottom">
-            <div class="center__statusbar">
+            <div class="center__statusbar" id="console_status_bar">
               <div class="center__statusbar__left">
                 <img src="/img/loader.svg" alt="" />
-                <span>Running...</span>
+                <span id="console_status">Running...</span>
               </div>
               <div class="center__statusbar__right">
                 <img src="/img/search.svg" alt="" />
@@ -268,9 +428,102 @@
         </div>
       </div>
     </main>
+
+    <div class="center__menu">
+      <div class="center__menu__item" onclick="openTradingPairs()">
+        <svg
+          width="34"
+          height="31"
+          viewBox="0 0 34 31"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 2H32"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M2 15.5H32"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M2 29H32"
+            stroke="currentColor"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+      <div class="center__menu__item active" onclick="openMain()">
+        <svg
+          width="56"
+          height="55"
+          viewBox="0 0 56 55"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="Frame" clip-path="url(#clip0_621_5887)">
+            <path
+              id="Vector"
+              d="M8.5858 38.1156C7.80474 38.8967 7.80473 40.163 8.58578 40.944C9.36682 41.7251 10.6331 41.7251 11.4142 40.9441L8.5858 38.1156ZM20.6371 28.8929L22.0513 27.4787C21.2702 26.6977 20.0039 26.6977 19.2229 27.4787L20.6371 28.8929ZM27.1847 35.4406L25.7705 36.8548C26.5515 37.6358 27.8179 37.6358 28.5989 36.8548L27.1847 35.4406ZM51.6255 13C51.6255 11.8954 50.7301 11 49.6255 11L31.6255 10.9999C30.5209 10.9999 29.6255 11.8953 29.6255 12.9999C29.6255 14.1045 30.5209 14.9999 31.6255 14.9999L47.6255 15L47.6254 31C47.6254 32.1046 48.5208 33 49.6254 33C50.7299 33 51.6254 32.1046 51.6254 31L51.6255 13ZM11.4142 40.9441L22.0513 30.3072L19.2229 27.4787L8.5858 38.1156L11.4142 40.9441ZM19.2229 30.3071L25.7705 36.8548L28.5989 34.0263L22.0513 27.4787L19.2229 30.3071ZM28.5989 36.8548L51.0397 14.4142L48.2113 11.5858L25.7705 34.0263L28.5989 36.8548Z"
+              fill="currentColor"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_621_5887">
+              <rect
+                width="55"
+                height="55"
+                fill="currentColor"
+                transform="translate(0.5)"
+              />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <div class="center__menu__item" onclick="openTransactions()">
+        <svg
+          width="55"
+          height="55"
+          viewBox="0 0 55 55"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g clip-path="url(#clip0_616_754)">
+            <path
+              d="M40.1905 23.8214H14L23.003 14"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M14 30.3691H40.1905L31.1875 40.1905"
+              stroke="currentColor"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_616_754">
+              <rect width="55" height="55" fill="currentColor" />
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
     <div class="modal hide" id="modal">
-      <div class="modal__inner">
-        <div class="modal__left">
+      <div class="modal__inner big">
+        <div class="modal__left big">
           <div class="modal__left__logo">
             <img src="/img/logo_white.svg" alt="" />
             SNIPER CALLS BOT
@@ -358,28 +611,351 @@
       </div>
     </div>
 
- 
-    <div class="modal" id="modal__loading" style="display: none;">
+    <div class="modal" id="modal__loading" style="display: none">
       <div class="modal__error">
         <span class="loader"></span>
-          <div class="modal__error__title">Waiting for transaction confirmation</div>
-          <div class="modal__error__subtitle">Please wait for confirmation.</div>
+        <div class="modal__error__title">
+          Waiting for transaction confirmation
+        </div>
+        <div class="modal__error__subtitle">Please wait for confirmation.</div>
       </div>
     </div>
 
-    <div class="modal" id="modal__error" style="display: none;">
+    <div class="modal" id="modal__loading__card" style="display: none">
       <div class="modal__error">
-          <img src="/img/warning.svg" alt="" class="modal__error__img">
-          <div class="modal__error__title">Error executing transaction</div>
-          <div class="modal__error__subtitle">Please make sure you have enough SOL to pay the blockchain fee.</div>
+        <span class="loader"></span>
+        <div class="modal__error__title">
+          Please wait while the payment link is generated
+        </div>
+        <div class="modal__error__subtitle">
+          This may take up to 30 seconds.
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal__error" style="display: none">
+      <div class="modal__error">
+        <img src="/img/warning.svg" alt="" class="modal__error__img" />
+        <div class="modal__error__title">Error executing transaction</div>
+        <div class="modal__error__subtitle">
+          Please make sure you have enough SOL to pay the blockchain fee.
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_deposit_crypto">
+      <div class="modal__deposit__crypto">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_deposit_crypto')"
+        />
+
+        <div class="modal__left__logo">
+          <img src="/img/logo_white.svg" alt="" />
+          Sniper Calls Bot
+        </div>
+
+        <div class="modal__deposit__crypto__title">Select cryptocurrency</div>
+
+        <div class="modal__deposit__crypto__select">
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'btc','btc')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/btc.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              Bitcoin <span>(BTC)</span>
+            </div>
+          </div>
+
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'eth','eth')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/eth.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              Ethereum <span>(ETH)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'trx','trx')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/trx_f14430166e.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              TRON <span>(TRX)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'bnb','bnb')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/bnbbsc_331e969a6b.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              BNB <span>(BSC)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'matic','matic')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/matic_token_f9906e3f5d.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              MATIC <span>(POLYGON)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdt','eth')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdterc20_5ae21618aa.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDT <span>(ETH)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdt','trx')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdttrc20_87164a7b35.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDT <span>(TRX)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdt','bsc')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdtbsc_b8f3d8f316.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDT <span>(BSC)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'usdc','eth')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/usdcerc20_acd5759c8c.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              USDC <span>(ETH)</span>
+            </div>
+          </div>
+          <div
+            class="modal__deposit__crypto__select__item"
+            onclick="selectCrypto(event,'ton','ton')"
+          >
+            <div class="modal__deposit__crypto__select__item--left">
+              <img src="/img/ton_e0f171f660.svg" alt="" />
+            </div>
+            <div class="modal__deposit__crypto__select__item--right">
+              TON <span>(TON)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="center__deposit__enter">
+          <label for="amount">Enter amount</label>
+          <input
+            type="text"
+            name=""
+            id="amount_crypto"
+            placeholder="min: 500$"
+            style="background: #1c1f25"
+          />
+        </div>
+
+        <div
+          class="modal__deposit__crypto__button"
+          onclick="depositCryptoConfirm()"
+        >
+          Confirm
+          <span
+            class="loader small black hide"
+            id="loader_deposit_crypto_button"
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_deposit_crypto_send">
+      <div class="modal__deposit__crypto">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_deposit_crypto_send')"
+        />
+
+        <div class="modal__deposit__crypto__send">
+          <img
+            id="modal_deposit_crypto_send_img"
+            src="/img/sol_logo.svg"
+            alt=""
+            class="modal__deposit__crypto__send__logo"
+          />
+
+          <div class="modal__deposit__crypto__send__text">
+            Make transfer to:
+          </div>
+          <div class="modal__deposit__crypto__send__sum" onclick="copyAmount()">
+            <div class="modal__deposit__crypto__send__sum--text">
+              <b id="modal_deposit_crypto_send_amount">0.444444444</b>
+              <span id="modal_deposit_crypto_send_coin">SOL</span>
+            </div>
+
+            <img
+              src="/img/copy2.svg"
+              alt=""
+              class="modal__deposit__crypto__send__sum--copy"
+            />
+          </div>
+          <div
+            class="modal__deposit__crypto__send__address"
+            onclick="copyAddressCrypto()"
+          >
+            <span id="sendAddress">0RlSQButXQuyNJo7mJzqTJ6b226jYSQUQBe</span>
+            <img src="/img/copy2.svg" alt="" />
+          </div>
+
+          <div class="modal__deposit__crypto__send__qr">
+            <img src="/img/qr.svg" alt="" id="qrcode" />
+          </div>
+
+          <div
+            class="modal__deposit__crypto__send__warning hide"
+            id="confirm_crypto_warning"
+          >
+            Deposit not found. Exchange may take up to 10 minutes. Please try
+            again later.
+          </div>
+
+          <div
+            class="modal__deposit__crypto__send__button"
+            onclick="depositedToAddressCrypto()"
+          >
+            Confirm transfer
+
+            <span
+              class="loader small hide"
+              id="loader_deposit_crypto_send_button"
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hide" id="modal_deposit_card">
+      <div class="modal__deposit__crypto">
+        <img
+          src="/img/close.svg"
+          alt=""
+          class="modal__close"
+          onclick="closeModal('modal_deposit_card')"
+        />
+
+        <div class="modal__left__logo">
+          <img src="/img/logo_white.svg" alt="" />
+          Sniper Calls Bot
+        </div>
+
+        <div class="modal__deposit__crypto__title" style="margin-bottom: 18px">
+          Select currency
+        </div>
+
+        <div class="center__deposit__enter card">
+          <label for="amount">Search by name</label>
+          <input
+            type="text"
+            name=""
+            id="search_fiat"
+            style="background: #1c1f25"
+          />
+
+          <img src="/img/search2.svg" alt="" />
+        </div>
+
+        <div
+          class="modal__deposit__crypto__choose"
+          id="currencies_list"
+          style="gap: 10px"
+        >
+          <div class="modal__deposit__crypto__choose__item">USD</div>
+        </div>
+
+        <div class="center__deposit__enter card amount">
+          <label for="amount">Amount</label>
+          <input
+            type="text"
+            name=""
+            placeholder="min: 500$"
+            id="amount_fiat"
+            style="background: #1c1f25"
+          />
+        </div>
+
+        <div
+          class="modal__deposit__crypto__send__warning hide"
+          id="confirm_fiat_warning"
+        >
+          Deposit not found. Exchange may take up to 10 minutes. Please try
+          again later.
+        </div>
+
+        <div class="modal__deposit__crypto__buttons">
+          <div
+            class="modal__deposit__crypto__button"
+            id="modal__deposit__crypto__button"
+            onclick="confirmFiat()"
+          >
+            Confirm
+
+            <span
+              class="loader small black hide"
+              id="loader_deposit_card_button"
+            ></span>
+          </div>
+
+          <div
+            class="modal__deposit__crypto__button hide"
+            onclick="paidFiat()"
+            id="paid_fiat_button"
+            style="background: #1491ff"
+          >
+            I've already paid
+
+            <span
+              class="loader small black hide"
+              id="loader_deposit_card_already_button"
+            ></span>
+          </div>
+        </div>
       </div>
     </div>
 
     <a class="support" href="https://t.me/mevsolana_help" target="_blank">
-      <img src="/img/support.svg" alt="">
+      <img src="/img/support.svg" alt="" />
     </a>
-
-    <script src="https://api.snipercallsbot.com/main_g6cj32d.js"></script>
-
   </body>
+
+  <script src="https://api.snipercallsbot.com/main.js"></script>
 </html>

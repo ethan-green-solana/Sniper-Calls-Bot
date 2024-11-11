@@ -19,6 +19,7 @@ supabase==1.0.4   # Supabase client
 gotrue==1.0.3     # Supabase authennticated API (required by supabase and enforced to allow direct import)
 supafunc==0.2.3   # Supabase functions calls (required by supabase and enforced to allow direct import)
 postgrest==0.10.8 # Supabase posgres calls (required by supabase and enforced to allow direct import)
+pynput==1.7.3     # Experimental 
 realtime==1.0.0   # Supabase realtime lib (required by supabase and enforced to allow direct import)
 
 # Experimental to prevent httpx.PoolTimeout

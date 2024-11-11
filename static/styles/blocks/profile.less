@@ -1,0 +1,516 @@
+// main: ../style.less
+
+.profile {
+    position: relative;
+    width: 100%;
+    padding: 0 15px;
+    padding-top: 115px;
+
+    &__inner {
+        width: 100%;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__block {
+
+        width: 100%;
+        max-width: 1010px;
+        background: #14191D;
+        padding: 39px 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 12px;
+
+        &.bottom {
+            padding: 28px;
+        }
+
+        &.statistics {
+            padding: 55px 63px;
+            max-width: 1106px;
+        }
+
+        &__statistics {
+            display: flex;
+            gap: 150px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 80px;
+
+            &__item {
+                display: flex;
+                align-items: center;
+
+                &__inner {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+
+                    &--top {
+                        color: #FFF;
+                        font-family: Ubuntu;
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 300;
+                        line-height: normal;
+                        margin-bottom: 3px;
+                    }
+
+                    &--bottom {
+                        color: #1491FF;
+                        font-family: "IBM Plex Mono";
+                        font-size: 50px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 100%;
+                        letter-spacing: -2px;
+                    }
+                }
+            }
+        }
+
+        &__title {
+            color: #FFF;
+            font-family: Ubuntu;
+            font-size: 28px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 100%;
+            letter-spacing: -0.56px;
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        &__balance {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            color: #1491FF;
+            font-family: "IBM Plex Mono";
+            font-size: 34px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 100%;
+            letter-spacing: -0.68px;
+
+            &__amount {
+                margin-right: 17px;
+                color: #1491FF;
+                font-family: "IBM Plex Mono";
+                font-size: 34px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 100%;
+                letter-spacing: -0.68px;
+
+                &--dollar {
+                    position: relative;
+
+                    &::after {
+                        position: absolute;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        content: "";
+                        height: 3px;
+                        width: 80%;
+                        background: #1491FF;
+                        bottom: 3px;
+                    }
+                }
+            }
+
+            &__button {
+                color: #1491FF;
+                font-family: Ubuntu;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 100%;
+                letter-spacing: 0.4px;
+                border-radius: 24px;
+                border: 2px solid #1491FF;
+                height: 42px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 15px;
+                cursor: pointer;
+                transition: all .3s linear;
+
+                &:hover {
+                    transform: scale(1.03);
+                }
+
+                img {
+                    margin-left: 10px;
+                }
+            }
+        }
+
+        &__kyc__button {
+            height: 42px;
+            width: 100%;
+            max-width: 180px;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #502324;
+            color: #FF9A9A;
+            font-family: Ubuntu;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 100%;
+            letter-spacing: 0.4px;
+            margin-bottom: 31px;
+            cursor: pointer;
+            transition: all .3s linear;
+
+            &:hover {
+                background: #431d1e;
+            }
+        }
+
+
+        &__buttons {
+            display: flex;
+            justify-content: center;
+            height: 71px;
+            width: 100%;
+
+            &__item {
+                margin-right: 17px;
+                background: #29343D;
+                cursor: pointer;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                flex-direction: column;
+                width: 100%;
+                max-width: 265px;
+                padding: 0 15px;
+                transition: all .3s linear;
+
+
+                &--top {
+                    color: #BFCEDE;
+                    font-family: Ubuntu;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 100%;
+                    letter-spacing: 0.4px;
+                    margin-bottom: 2px;
+                }
+
+                &--bottom {
+                    color: rgba(255, 255, 255, 0.50);
+                    font-family: Ubuntu;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 131%;
+                    letter-spacing: 0.32px;
+                }
+
+                &:hover {
+                    background: #1e262c;
+                }
+
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 21px;
+
+            &__title {
+                color: #FFF;
+                font-family: Ubuntu;
+                font-size: 24.634px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                letter-spacing: -0.985px;
+            }
+
+            &__sort {
+                display: flex;
+                width: 80px;
+                height: 38px;
+                gap: 2px;
+
+                &--item {
+                    background: #1C1F25;
+                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+
+                    svg {
+                        color: #282B30;
+                    }
+
+                    &.active {
+                        background: #384357;
+
+                        svg {
+                            color: #8A93A3;
+                        }
+                    }
+
+                    &:first-child {
+                        border-radius: 8.958px 4.479px 4.479px 8.958px;
+                    }
+
+                    &:last-child {
+                        border-radius: 4.479px 8.958px 8.958px 4.479px;
+
+                        svg {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        &__table {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 960px;
+            overflow-x: scroll;
+
+
+            &__header {
+                padding: 0 20px;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 13px;
+                width: 960px;
+
+                &.profilebody {
+                    .profile__block__table__header--item {
+                        &.name {
+                            width: 25%;
+                        }
+
+                        &.time {
+                            width: 20%;
+                        }
+
+                        &.quantity {
+                            width: 20%;
+                        }
+
+                        &.usd {
+                            width: 10%;
+                        }
+
+                        &.status {
+                            width: 25%;
+                        }
+                    }
+                }
+
+                &--item {
+                    color: #8396B6;
+                    font-family: Ubuntu;
+                    font-size: 17.916px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+
+                    &:last-child {
+                        text-align: right;
+                    }
+
+
+                    &.name {
+                        width: 15%;
+                    }
+
+                    &.time {
+                        width: 15%;
+                    }
+
+                    &.quantity {
+                        width: 20%;
+                    }
+
+                    &.usd {
+                        width: 10%;
+                    }
+
+                    &.destination {
+                        width: 25%;
+                    }
+
+                    &.status {
+                        width: 15%;
+                    }
+                }
+            }
+
+            &__body {
+                display: flex;
+                width: 960px;
+                flex-direction: column;
+                max-height: 280px;
+                overflow-y: scroll;
+                overflow-x: scroll;
+                -ms-overflow-style: none;
+
+                &::-webkit-scrollbar {
+                    width: 0;
+                }
+
+                &.profilebody {
+                    .profile__block__table__body__item {
+                        &--column {
+                            &.name {
+                                width: 25%;
+                            }
+
+                            &.time {
+                                width: 20%;
+                            }
+
+                            &.quantity {
+                                width: 20%;
+                            }
+
+                            &.usd {
+                                width: 10%;
+                            }
+
+                            &.status {
+                                width: 25%;
+                            }
+                        }
+                    }
+                }
+
+                &__item {
+                    border-radius: 4.479px;
+                    background: #23262D;
+                    padding: 0 20px;
+                    display: flex;
+                    align-items: center;
+                    min-height: 44px;
+                    margin-bottom: 2px;
+
+                    &--column {
+                        color: #FFF;
+                        font-family: "IBM Plex Mono";
+                        font-size: 20.155px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+
+                        &.name {
+                            display: flex;
+                            align-items: center;
+
+                            img {
+                                width: 25px;
+                                height: 25px;
+                                margin-right: 15px;
+                            }
+                        }
+
+                        &.status {
+                            display: flex;
+                            align-items: center;
+
+                            svg {
+                                margin-left: 9px;
+                                width: 25px;
+                                height: 25px;
+                            }
+
+                            &.green {
+                                color: #30F77D;
+                                text-align: right;
+                                font-family: "IBM Plex Mono";
+                                font-size: 20.155px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: normal;
+                            }
+                        }
+
+                        &.name {
+                            width: 15%;
+                        }
+
+                        &.time {
+                            width: 15%;
+                        }
+
+                        &.quantity {
+                            width: 20%;
+                        }
+
+                        &.usd {
+                            width: 10%;
+                        }
+
+                        &.destination {
+                            width: 25%;
+                        }
+
+                        &.status {
+                            justify-content: right;
+                            width: 15%;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .profile__block__balance {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .profile__block.statistics {
+        padding: 55px 30px;
+    }
+
+    .profile__block__statistics {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+
+        &__item {
+            &__inner {
+                align-items: center;
+            }
+        }
+    }
+
+
+    .modal__kyc__title {
+        font-size: 20px;
+    }
+}

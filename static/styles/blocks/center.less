@@ -5,6 +5,17 @@
     width: 100%;
     padding-top: 80px;
 
+    &__label {
+        color: rgba(255, 255, 255, 0.40);
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 200%;
+        letter-spacing: 0.32px;
+    }
+
     &__inner {
         width: 100%;
         height: 100%;
@@ -12,6 +23,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
+        position: relative;
 
         &.hide {
             display: none;
@@ -37,7 +49,7 @@
         font-size: 34px;
         font-style: normal;
         font-weight: 500;
-        line-height: 106%;
+        line-height: 130%;
         margin-bottom: 28px;
     }
 
@@ -348,7 +360,7 @@
             }
 
             &.down {
-                margin-bottom: 34px;
+                margin-bottom: 10px;
             }
         }
 
@@ -401,6 +413,115 @@
                 margin-right: 10px;
             }
         }
+
+        &__another {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            &__button {
+                height: 44px;
+                background-color: #1C1F25;
+                width: 50%;
+                box-shadow: 0px 0px 10px 0px #1491FF;
+                border: 1px solid #1491FF;
+                transition: all 0.3s linear;
+                cursor: pointer;
+                color: #FFF;
+                text-align: center;
+                font-family: Ubuntu;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 200%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    margin-left: 5px;
+                }
+
+                &:hover {
+                    border-radius: 10px;
+
+                }
+
+                &:first-child {
+                    margin-right: 23px;
+                }
+            }
+        }
+    }
+
+    &__menu {
+        height: 80px;
+        width: 100%;
+        background: rgba(28, 31, 37, 0.50);
+        backdrop-filter: blur(50px);
+        display: flex;
+        padding: 0 21px;
+        align-items: center;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0;
+        display: none;
+        cursor: pointer;
+        z-index: 100;
+
+        &__item {
+            transition: all .3s linear;
+
+            svg {
+                transition: all .3s linear;
+
+                color: white;
+            }
+        }
+
+        &__item.active {
+            svg {
+                color: #1491FF;
+            }
+        }
+
+        &__swipe {
+            display: none;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            bottom: 20px;
+            z-index: 4;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: moveLeftRight 5s infinite;
+
+        }
+
+        @keyframes moveLeftRight {
+            0% {
+                transform: translateX(-50%);
+
+            }
+
+            25% {
+                transform: translateX(calc(-50% - 50px));
+                /* Движение влево на 50 пикселей */
+            }
+
+            50% {
+                transform: translateX(-50%);
+            }
+
+            75% {
+                transform: translateX(calc(-50% + 50px));
+                /* Движение вправо на 50 пикселей */
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
     }
 }
 
@@ -418,9 +539,13 @@
     z-index: -1;
 
     &.green {
-
         background: rgba(40, 98, 255, 0.01);
         box-shadow: 0px 0px 1000px 200px #12F766;
+    }
+
+    &.yellow {
+        background: rgba(40, 98, 255, 0.01);
+        box-shadow: 0px 0px 1000px 200px #DAC65D;
     }
 }
 
@@ -432,6 +557,7 @@
     left: 50%;
     transform: translate3d(-50%, -50%, 0);
     background: #1C1F25;
+    z-index: 6;
 
     &.hide {
         display: none;
@@ -447,6 +573,12 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 35px;
+
+        &.yellow {
+            background: #DAC65D;
+            box-shadow: 0px 0px 25px 0px #DAC65D;
+
+        }
 
 
 
@@ -486,6 +618,44 @@
         justify-content: space-between;
         margin-bottom: 20px;
 
+        &__line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 44px;
+            flex-wrap: wrap;
+
+            &--left {
+                color: rgba(255, 255, 255, 0.50);
+                font-family: Ubuntu;
+                font-size: 22px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin-right: 15px;
+            }
+
+            &--right {
+                color: #FFF;
+                font-family: Ubuntu;
+                font-size: 28px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                display: flex;
+                align-items: center;
+
+                &__gray {
+                    color: #A4A8B1;
+                    font-family: Ubuntu;
+                    font-size: 22px;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: normal;
+                }
+            }
+        }
+
         &__item {
             display: flex;
             flex-direction: column;
@@ -502,7 +672,7 @@
             &--bottom {
                 color: #FFF;
                 font-family: Ubuntu;
-                font-size: 30px;
+                font-size: 24px;
                 font-style: normal;
                 font-weight: 400;
                 line-height: normal;
@@ -536,6 +706,14 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+
+            &.start {
+                background: linear-gradient(89deg, #2eb96d .16%, #03810f 99.61%)
+            }
+
+            &.stop {
+                background: linear-gradient(89deg, #2eb96d .16%, #03810f 99.61%)
+            }
         }
     }
 }
@@ -561,17 +739,269 @@
         font-size: 18px;
 
         span {
-        font-size: 18px;
+            font-size: 18px;
 
         }
     }
 
     .center__deposit__button {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .center__deposit__or {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
 
     }
+}
+
+@media(max-width: 1000px) {
+    .center {
+        padding-bottom: 80px;
+
+    }
+
+    .center__menu__swipe {
+        display: block;
+    }
+
+    .left {
+        display: none;
+    }
+
+    .right {
+        display: none;
+    }
+
+    .header__wallet {
+        width: fit-content;
+    }
+
+    .header__inner {
+        padding: 0 15px;
+    }
+
+    .header__logo {
+        span {}
+    }
+
+    .center__statusbar,
+    .center__console {
+        display: none;
+    }
+
+    .center__menu {
+        display: flex;
+    }
+
+    .left,
+    .right {
+        max-width: none;
+    }
+
+    .modal__left {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .modal {
+        padding: 0 15px;
+    }
+
+    .center__deposit__another {
+        flex-wrap: wrap;
+
+        &__button {
+            margin-bottom: 10px;
+            width: 100%;
+
+            &:first-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .left__table__body {
+        overflow: scroll;
+        max-height: 500px;
+        /* Это максимальная высота, которая может динамически меняться */
+        overflow-y: auto;
+        /* Включает вертикальный скролл, если контент превышает max-height */
+    }
+
+    .right__table__body {
+        overflow: scroll;
+        max-height: 500px;
+        /* Это максимальная высота, которая может динамически меняться */
+        overflow-y: auto;
+        /* Включает вертикальный скролл, если контент превышает max-height */
+    }
+
+    .modal__deposit__crypto__select__item {
+        width: 100%;
+    }
+
+    // #smartsupp-widget-container>div {
+    //     bottom: 100px !important;
+    // }
+
+    #center3bottom {
+        display: none;
+    }
+
+    .glow {
+        top: 50%;
+    }
+
+    .center__success {
+        top: 50%;
+    }
+}
+
+@media(max-width: 600px) {
+    .center__alert {
+        font-size: 16px;
+    }
+
+    .modal__deposit__crypto__button {
+        font-size: 16px;
+    }
+
+    .modal__deposit__crypto__send__warnin {
+        font-size: 16px;
+    }
+
+    .modal__deposit__crypto__send__address {
+        span {
+            font-size: 9px;
+        }
+    }
+
+    .modal_deposit_crypto_send_amount {
+        font-size: 25px;
+    }
+
+    .modal__deposit__crypto__send__sum--text {
+        font-size: 25px;
+
+        b {
+            font-size: 25px;
+
+        }
+    }
+
+    .center__deposit__button.down {
+        font-size: 12px;
+        height: 44px;
+    }
+
+    .center__deposit__another__button {
+        font-size: 12px;
+    }
+
+
+    .center__deposit__address {
+        span {
+            font-size: 10px;
+        }
+
+        img {
+            width: 15px;
+            height: 15px;
+        }
+    }
+
+    .modal__deposit__crypto__choose__item {
+        min-height: 40px;
+        font-size: 18px;
+    }
+
+    .modal__deposit__crypto__choose {
+        max-height: 150px;
+        margin-bottom: 10px;
+    }
+
+    .modal__deposit__crypto__title {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    .center__deposit__enter {
+        input {
+            margin-bottom: 20px;
+        }
+    }
+
+    .modal__left__logo {
+        margin-bottom: 14px;
+    }
+
+    .modal__deposit__crypto__title {
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+
+    .modal__deposit__crypto__select__item--left {
+        img {
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    .modal__deposit__crypto__select__item {
+        height: 50px;
+    }
+
+    .modal__deposit__crypto__select {
+        max-height: 200px;
+    }
+
+    .center__success {
+        width: calc(100% - 30px);
+    }
+
+    .center__success__stats__item--bottom {
+        font-size: 15px;
+
+        span {
+            font-size: 15px;
+        }
+    }
+
+    .center__success__stats {
+        gap: 0;
+    }
+}
+
+
+.center__success__buttons {
+    display: flex;
+    align-items: center;
+
+    .center__success__button__inner:first-child {
+        margin-right: 12px;
+    }
+
+    &.hide {
+        display: none;
+    }
+}
+
+@media(max-width: 400px) {
+    .center__alert {
+        font-size: 14px;
+    }
+
+    .center__success__buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .center__success__button__inner:first-child {
+        margin-right: 0 !important;
+    }
+
+    .center__success.long {
+        height: 297px;
+    }
+
 }
