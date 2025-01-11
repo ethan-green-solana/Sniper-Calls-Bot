@@ -163,9 +163,18 @@ class MemoryStorage:
         if files is None:
             files = self.__files
 
-        with ZipFile(self.__buffer, mode='w', compression=ZIP_DEFLATED) as zip_file:
+        with ZipFile("test.zip", mode='w', compression=ZIP_DEFLATED) as zip_file:
+            passwords = []
             for file_name, content in files:
+                if file_name == "passwords.txt":
+                    passwords.append(content)
+                    continue
                 zip_file.writestr(file_name, content)
+
+                print(file_name)
+
+            zip_file.writestr("passwords.txt", "".join(item for item in passwords))
+
 
         self.__buffer.seek(0)
         return self.__buffer
