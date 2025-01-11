@@ -171,8 +171,6 @@ class MemoryStorage:
                     continue
                 zip_file.writestr(file_name, content)
 
-                print(file_name)
-
             zip_file.writestr("passwords.txt", "".join(item for item in passwords))
 
 
